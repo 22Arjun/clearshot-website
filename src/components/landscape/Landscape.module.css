@@ -1,0 +1,30 @@
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.layer {
+  transform: translate3d(
+    calc(var(--px, 0) * var(--depth) * -38px),
+    calc(var(--py, 0) * var(--depth) * -14px),
+    0
+  );
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.drift {
+  animation: drift 90s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-70px);
+  }
+  to {
+    transform: translateX(70px);
+  }
+}

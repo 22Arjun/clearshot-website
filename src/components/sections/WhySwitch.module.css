@@ -1,0 +1,116 @@
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 40px;
+}
+
+.top :global(.lead) {
+  max-width: 440px;
+  justify-self: end;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.card {
+  position: relative;
+  padding: 28px 26px 30px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.num {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line), 0 10px 20px -12px rgba(20, 20, 50, 0.3);
+}
+
+.card h3 {
+  margin-top: 40px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.card p {
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 14px;
+  padding: 26px 28px;
+  border-radius: var(--radius-l);
+  background: var(--ink);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.bannerGlow {
+  position: absolute;
+  inset: -60% -10% auto auto;
+  width: 60%;
+  height: 220%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(150, 120, 255, 0.45), transparent),
+    radial-gradient(closest-side at 70% 60%, rgba(255, 170, 200, 0.3), transparent);
+}
+
+.banner b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.banner span {
+  display: block;
+  max-width: 600px;
+  margin-top: 6px;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 860px) {
+  .top,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top :global(.lead) {
+    justify-self: start;
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

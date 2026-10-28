@@ -1,0 +1,122 @@
+.layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+.side {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.side :global(.lead) {
+  max-width: 360px;
+  margin-top: 20px;
+}
+
+.side :global(.btn) {
+  margin-top: 24px;
+}
+
+.list {
+  border-top: 1px solid var(--line);
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+.item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.6vw, 21px);
+  letter-spacing: -0.025em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.item summary::-webkit-details-marker {
+  display: none;
+}
+
+.item summary:hover {
+  color: var(--ink-3);
+}
+
+.plus {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--surface-2);
+  transition: background-color 0.3s, transform 0.5s var(--ease);
+}
+
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 1.6px;
+  margin: -0.8px 0 0 -6px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.5s var(--ease);
+}
+
+.plus::after {
+  transform: rotate(90deg);
+}
+
+.item[open] .plus {
+  background: var(--ink);
+  transform: rotate(180deg);
+}
+
+.item[open] .plus::before,
+.item[open] .plus::after {
+  background: #fff;
+}
+
+.item[open] .plus::after {
+  transform: rotate(0deg);
+}
+
+.item p {
+  max-width: 600px;
+  padding: 0 48px 26px 0;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+.item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 0.5s var(--ease), content-visibility 0.5s allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    position: static;
+  }
+}

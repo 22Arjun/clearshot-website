@@ -1,0 +1,604 @@
+/* Shared two-column feature layout (Capture, Record) */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.flip {
+  grid-template-columns: 1.08fr 1fr;
+}
+
+.flip .copy {
+  order: 2;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.copy h2 {
+  margin-top: 20px;
+}
+
+.copy :global(.lead) {
+  max-width: 470px;
+  margin-top: 20px;
+}
+
+.copy :global(.small) {
+  margin-top: 18px;
+}
+
+.copy > :global(.btn) {
+  margin-top: 18px;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  max-width: 470px;
+  margin-top: 30px;
+}
+
+.modes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.4s var(--ease);
+}
+
+.modes li:hover {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow-m);
+  transform: translateY(-1px);
+}
+
+.modes li svg {
+  color: var(--ink-3);
+}
+
+.modes kbd {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.callout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 470px;
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 40px -26px rgba(20, 20, 50, 0.35), var(--shadow-s);
+}
+
+.callout b {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.callout span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.calloutIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(140deg, #eef0ff, #f5eeff);
+  color: var(--accent);
+}
+
+.checks {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.checks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.checks li span {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  flex: none;
+}
+
+.visual {
+  position: relative;
+  aspect-ratio: 1 / 1.04;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-l);
+  isolation: isolate;
+}
+
+/* ── Scrolling capture scene ───────────────────────────────── */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+.strip {
+  position: absolute;
+  top: 11%;
+  right: 8%;
+  width: 32%;
+  height: 74%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 30px 60px -24px rgba(40, 30, 90, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.6);
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+  mask-image: linear-gradient(180deg, #000 70%, transparent);
+}
+
+.stripPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  transition: transform 0.25s linear;
+}
+
+.stripPage i {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: #e8e6f2;
+}
+
+.stripPage .pShort {
+  width: 60%;
+}
+
+.stripPage .pHero {
+  height: 54px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #b9a7ef, #f1c3dd);
+}
+
+.stripPage .pImg {
+  height: 70px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #a5c6ec, #8cb46c);
+}
+
+.task {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  width: min(72%, 360px);
+  padding: 18px;
+  border-radius: 20px;
+  transform: translateY(-50%);
+}
+
+.taskHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+.taskHead b {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.progress {
+  height: 6px;
+  margin-top: 16px;
+  border-radius: 999px;
+  background: rgba(13, 13, 16, 0.08);
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8a7bff, #c49cff);
+  transition: width 0.2s linear;
+}
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.steps {
+  display: grid;
+  gap: 2px;
+  margin-top: 14px;
+}
+
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--muted);
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.steps li[data-state="done"] {
+  color: var(--ink);
+}
+
+.steps li[data-state="active"] {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.stepDot {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted-2);
+  color: #fff;
+}
+
+.steps li[data-state="done"] .stepDot {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.steps li[data-state="active"] .stepDot {
+  border-color: var(--accent);
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+.stepArrow {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Recording editor scene ────────────────────────────────── */
+
+.editor {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 50%;
+  z-index: 4;
+  padding: 12px;
+  border-radius: 22px;
+  transform: translateY(-50%);
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.frameBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  background: #f5f5f7;
+  border-bottom: 1px solid var(--line);
+}
+
+.frameBar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.frameBar i:nth-child(2) {
+  background: #febc2e;
+}
+
+.frameBar i:nth-child(3) {
+  background: #28c840;
+}
+
+.slide {
+  position: absolute;
+  inset: 26px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6%;
+  align-items: center;
+  padding: 0 8%;
+}
+
+.slide b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.8vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.slide em {
+  font-family: var(--font-serif);
+  color: #9a7cf0;
+}
+
+.slide span {
+  display: block;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: #ececf2;
+}
+
+.slideArt {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background:
+    radial-gradient(60% 50% at 70% 25%, #fff6dc, transparent 70%),
+    linear-gradient(180deg, #e9c9b5 0%, #f7d9a8 45%, #90974a 46%, #45541c 100%);
+}
+
+.camBubble {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  width: 18%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background:
+    radial-gradient(28% 32% at 50% 40%, #e6a988 96%, transparent),
+    radial-gradient(60% 40% at 50% 105%, #5466ff 96%, transparent),
+    linear-gradient(160deg, #fbe9dc, #d9b8a6);
+  box-shadow: 0 10px 22px -8px rgba(0, 0, 0, 0.45);
+}
+
+.clicks {
+  position: absolute;
+  left: 30%;
+  top: 62%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(84, 102, 255, 0.9);
+  animation: clickPulse 2.4s ease-out infinite;
+}
+
+@keyframes clickPulse {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.timeline {
+  position: relative;
+  margin-top: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.thumbs {
+  display: flex;
+  height: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thumbs i {
+  flex: 1;
+  background:
+    linear-gradient(180deg, #fff 0 22%, transparent 22%),
+    linear-gradient(90deg, #f1eef8 0 48%, #e9c9b5 48% 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.7);
+  filter: saturate(calc(0.7 + var(--i) * 0.05));
+}
+
+.trim {
+  position: absolute;
+  top: 8px;
+  bottom: 30px;
+  left: 14%;
+  right: 22%;
+  border: 3px solid #ffcc33;
+  border-left-width: 9px;
+  border-right-width: 9px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 999px rgba(255, 255, 255, 0.55);
+  clip-path: inset(-2px -2px -2px -2px);
+}
+
+.timeline {
+  overflow: hidden;
+}
+
+.playhead {
+  position: absolute;
+  top: 2px;
+  bottom: 24px;
+  left: 14%;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  animation: playhead 5s linear infinite;
+}
+
+.playhead::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--ink);
+}
+
+@keyframes playhead {
+  to {
+    left: 78%;
+  }
+}
+
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+  margin-top: 6px;
+}
+
+.wave i {
+  flex: 1;
+  height: var(--h);
+  border-radius: 2px;
+  background: #b9b4d6;
+}
+
+.exportBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12.5px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px var(--line);
+  font-weight: 550;
+  color: var(--ink-3);
+}
+
+.chip[data-on] {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+}
+
+.exportBar .size {
+  margin-left: auto;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.exportBar :global(.btn) {
+  --h: 30px;
+  padding: 0 14px;
+  font-size: 12.5px;
+}
+
+@media (max-width: 900px) {
+  .split,
+  .flip {
+    grid-template-columns: 1fr;
+  }
+
+  .flip .copy {
+    order: 0;
+  }
+
+  .visual {
+    aspect-ratio: 1 / 1.05;
+  }
+}
+
+@media (max-width: 480px) {
+  .modes {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    aspect-ratio: 4 / 5;
+  }
+
+  .task {
+    left: 6%;
+    width: 78%;
+  }
+
+  .exportBar .size {
+    display: none;
+  }
+
+  .exportBar :global(.btn) {
+    margin-left: auto;
+  }
+}
